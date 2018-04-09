@@ -3,6 +3,7 @@
 <head>
 	<title>Projeto2- chat sobre Mansplanning</title>
 	<link rel="stylesheet" href="./assets/css/styles.css">
+	<script src="./assets/javascript/script.js"></script>
 </head>
 <body>
 	
@@ -14,12 +15,12 @@
 
 <section>
 
-	<img src="./assets\img\01-sim.png">
+	<img id="imagem" src="./assets\img\01.png">
 </section>
 <section>
 	<p> Você acha que isso é Mansplanning?</p>
-	<button>NÃO</button> 
-	<button>SIM</button>
+	<button id="botao-nao" onclick="redirect()" value="false">NÃO</button> 
+	<button id="botao-sim" onclick="redirect()"  value="true" >SIM</button>
 </section>
 
 <footer> 
