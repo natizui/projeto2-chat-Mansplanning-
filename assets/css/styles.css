@@ -17,12 +17,29 @@ nav p {
 	color: #fff;
     font-size: 50px;
     font-family: sans-serif;
-    margin: 0px 0px 42px 0px; 
+    margin: 0px 0px 22px 0px; 
 }
 
 section{
-    margin: auto;
-    width: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.section1 {
+    max-height: 50vh;
+}
+
+.section2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section2 > div {
+    display: flex;
+    justify-content: center;
 }
 
 article{
@@ -39,7 +56,7 @@ section img{
 }
 
 .restart {
-        margin: 12px -102px 2px 102px;
+        margin-top: 12px;
 }
 button{
 	background: #7e489c;
@@ -81,33 +98,37 @@ footer p {
 
 .col-6 p{
     font-size: 15px;
-    margin: 0px 0px 14px 200px;
-}
-
-#acertos p{
+    /* margin: 0px 0px 14px 200px; */
     text-align: left;
 }
 
-#acertos p span{
-background: #000;
-margin-right: 10px;
-color: #fff;
-padding: 4px;
-border-radius: 13px;
+.col-6 p span{
+    background: #000;
+    margin-right: 10px;
+    color: #fff;
+    padding: 4px;
+    border-radius: 13px;
 }
 
 .col{
-    margin-right: -15px;
-    margin-left: -15px;
-     display: table;  
+    /* margin-right: -15px;
+    margin-left: -15px; */
+    display: flex;
+    justify-content: space-around;  
+}
 
+.lado-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 150px;
 }
 
 #resultado{
     background: #fff;
     border: 1px solid #fff;
     border-radius: 10px;
-    margin-top: 30px;
+    margin-top: 23px;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 30px;
@@ -120,8 +141,8 @@ border-radius: 13px;
 
 
 img.reportagem {
-     padding: 23px 137px;
-      max-width: 119px;
+    padding: 23px 137px;
+    max-width: 119px;
 }
 
 
@@ -146,6 +167,6 @@ a:houver{
 }
 
 .lado-2{
-        border: 1px solid #9C27B0;
+    border: 1px solid #9C27B0;
     border-radius: 12px;
 }

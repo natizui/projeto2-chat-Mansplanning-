@@ -1,41 +1,76 @@
-let teste = ["teste"];
+// #region INDEX.HTML 
+let questionsAndAnswers = [
+    { question: "./assets/img/01.png", answer: "yes"  },
+    { question: "./assets/img/02.png", answer: "yes"  },
+    { question: "./assets/img/03.png", answer: "yes"  },
+    { question: "./assets/img/04.png", answer: "yes"  },
+    { question: "./assets/img/05.png", answer: "no"  },
+    { question: "./assets/img/06.png", answer: "no"  },
+    { question: "./assets/img/07.png", answer: "yes"  },
+    { question: "./assets/img/08.png", answer: "yes"  },
+    { question: "./assets/img/09.png", answer: "no"  },
+    { question: "./assets/img/010.png", answer: "yes"  },
+];
 
-// function myFunction(){
-//     let click = document.getElementsByClassName("botao");
-//     console.log(click);
-//     teste.push(click);
-//     console.log(teste);
-//     return;
-// }
+let userAnswers = [];
+let score = 0;
+let c = 0;
 
+let redirect = function(userAnswer){
+    if( c < questionsAndAnswers.length ){
 
-// function adicionarRespostaSim() {
-//     var sim = document.getElementById("botao-sim").value;
-//     console.log(sim);
-//     teste.push(sim);
-//     console.log(teste);
-//     location.href = "../outras-perguntas/pergunta-02.html";
-// }
-let gabarito = [true, true, true, true, false, false, true, true, false, true];
-console.log(gabarito);
-console.log(gabarito.length);
-
-
-
-let click = 2;
-function redirect(){
-    console.log(click);
-    if( click <= gabarito.length){
-        for (let i = 2; i <= click ; i++) {
-            console.log("entrou no for");
-            let novaImagem = "assets/img/0" + i + ".png";
-            console.log(novaImagem);
-            document.getElementById("imagem").src = novaImagem;
+        if( userAnswer == questionsAndAnswers[c].answer ){
+            score += 1;
+            userAnswers.push("ACERTOU");
         }
+
+        else{
+            userAnswers.push("ERROU");
+        }
+
+        let newImage = questionsAndAnswers[c].question;
+        document.getElementById("imagem").src = newImage;
     }
+
     else{
+        sessionStorage.setItem("userAnswers", userAnswers);
+        sessionStorage.setItem("score", score);
         window.location = "resultado.html";
     }
-    click += 1;
 
+    c += 1;
 }
+
+// #endregion
+
+
+// #region RESULTADO.HTML
+let funcao = function() {
+    let serializedUserAnswers = sessionStorage.getItem("userAnswers");
+    let userAnswersResult = serializedUserAnswers.split(",");
+    
+    let scoreResult = sessionStorage.getItem("score");
+
+    let changeResults = document.getElementById("acertos").children;
+    
+    userAnswersResult.forEach( (element, i) => {
+        changeResults[i].innerHTML = element;
+    });
+
+    document.getElementById("resultado").innerHTML = scoreResult + " ACERTOS";
+}
+
+if( document.getElementById("result") ) {
+    window.onload = funcao;
+}
+
+
+
+
+
+
+
+
+// changeResults[1].style.backgroundColor = "yellow";
+
+// #endregion
