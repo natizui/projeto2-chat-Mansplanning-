@@ -16,65 +16,64 @@ let userAnswers = [];
 let score = 0;
 let c = 0;
 
-let redirect = function(userAnswer){
-    if( c < questionsAndAnswers.length ){
-
-        if( userAnswer == questionsAndAnswers[c].answer ){
+let answerClick = function(userAnswer){
+    // while( c < questionsAndAnswers.length ){
+        
+        if( userAnswer === questionsAndAnswers[c].answer ){
             score += 1;
             userAnswers.push("ACERTOU");
         }
-
+        
         else{
             userAnswers.push("ERROU");
         }
-
-        let newImage = questionsAndAnswers[c].question;
-        document.getElementById("imagem").src = newImage;
-    }
-
-    else{
-        sessionStorage.setItem("userAnswers", userAnswers);
-        sessionStorage.setItem("score", score);
-        window.location = "resultado.html";
-    }
-
-    c += 1;
+        
+        c += 1;
+        
+        if (c === questionsAndAnswers.length){
+            sessionStorage.setItem("userAnswers", userAnswers);
+            sessionStorage.setItem("score", score);
+            window.location = "resultado.html";
+        }
+        else{
+            document.getElementById("imagem").src = questionsAndAnswers[c].question;
+        }
+    // }
 }
-
 // #endregion
 
 
 // #region RESULTADO.HTML
 let funcao = function() {
+    
     let serializedUserAnswers = sessionStorage.getItem("userAnswers");
     let userAnswersResult = serializedUserAnswers.split(",");
     
     let scoreResult = sessionStorage.getItem("score");
-
-    let changeResults = document.getElementById("acertos").children;
-    let changeColor = document.querySelector("#questao").children;
+    
+    let newResults = document.getElementById("acertos").children;
+    let newColor = document.querySelector("#questao").children;
     
     userAnswersResult.forEach( (element, i) => {
-        changeResults[i].innerHTML = element;
+        newResults[i].innerHTML = element;
         
         function changeBackground(color) {
-            changeColor[i].style.background = color;
+            newColor[i].style.background = color;
         };
         
         switch (element) {
             case "ACERTOU":
-                cor = "green";
-                break;
+            cor = "green";
+            break;
             case "ERROU":
-                cor = "red";    
+            cor = "red";    
             default:
-                break;
+            break;
         }
         changeBackground(cor);
     });
-
+    
     document.getElementById("resultado").innerHTML = scoreResult + " ACERTOS";
-
 }
 
 if( document.getElementById("result") ) {
@@ -82,12 +81,5 @@ if( document.getElementById("result") ) {
 }
 
 
-
-
-
-
-
-
-// changeResults[1].style.backgroundColor = "yellow";
 
 // #endregion
