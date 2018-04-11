@@ -44,8 +44,11 @@ let answerClick = function(userAnswer){
 
 
 // #region RESULTADO.HTML
+
+
+
+
 let changeUserResultsOnResultPage = function() {
-    
     let serializedUserAnswers = sessionStorage.getItem("userAnswers");
     let userAnswersResult = serializedUserAnswers.split(",");
     
@@ -74,6 +77,28 @@ let changeUserResultsOnResultPage = function() {
     });
     
     document.getElementById("resultado").innerHTML = scoreResult + " ACERTOS";
+    
+    let emoticons = ["./assets/img/emoticons/face-feliz.png", "./assets/img/emoticons/face-ok.png", "./assets/img/emoticons/Face-chatiado.png", "./assets/img/emoticons/face-triste.png"];
+    
+    let changeEmoticon = function (i) {
+        document.getElementById("emoticom").src = emoticons[i];
+    }
+    if(scoreResult >= 3*userAnswersResult.length/emoticons.length && scoreResult <= userAnswersResult.length/emoticons.length){
+        i = 0;
+    }
+    else if(scoreResult >= 2*userAnswersResult.length/emoticons.length && scoreResult < 3*userAnswersResult.length/emoticons.length){
+        i = 1;
+    }
+    else if(scoreResult >= userAnswersResult.length/emoticons.length && scoreResult < 2*userAnswersResult.length/emoticons.length){
+        i = 2;
+    }
+    else if(scoreResult >= 0 && scoreResult < userAnswersResult.length/emoticons.length){
+        i = 3;
+    }
+    else{
+        console.log("alguma coisa está errada :(")
+    }
+    changeEmoticon(i);
 }
 
 if( document.getElementById("result") ) {

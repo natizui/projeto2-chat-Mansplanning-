@@ -42,9 +42,28 @@ section{
 }
 
 .section1 > div {
-    width: 100%;
+    width: 600px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 5vh 0;
+}
+
+#timer {
+    background: white  url("../img/emoticons/timer-border.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 84px;
+    height: 25px;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#timer p {
+    margin-right: 16px;
 }
 
 .section2 {
