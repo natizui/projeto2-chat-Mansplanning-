@@ -9,15 +9,19 @@ header{
 	    background: #7e489c;
 }
 
-p{
-      font-family: sans-serif;
+p, h1{
+    font-family: sans-serif;
 } 
+
+h1{
+    margin: 0 0 10px 0;
+}
 
 nav p {
 	color: #fff;
     font-size: 50px;
     font-family: sans-serif;
-    margin: 0px 0px 22px 0px; 
+    margin: 0px 0px 8px 0px; 
 }
 
 section{
@@ -56,7 +60,7 @@ section img{
 }
 
 .restart {
-        margin-top: 12px;
+        margin-top: 8px;
 }
 button{
 	background: #7e489c;
@@ -102,12 +106,19 @@ footer p {
     text-align: left;
 }
 
-.col-6 p span{
+#questao p{
     background: #000;
     margin-right: 10px;
     color: #fff;
     padding: 4px;
     border-radius: 13px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#acertos p{
+    padding: 4px;
+    font-weight: bold;
 }
 
 .col{

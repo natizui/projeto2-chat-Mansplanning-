@@ -52,12 +52,29 @@ let funcao = function() {
     let scoreResult = sessionStorage.getItem("score");
 
     let changeResults = document.getElementById("acertos").children;
+    let changeColor = document.querySelector("#questao").children;
     
     userAnswersResult.forEach( (element, i) => {
         changeResults[i].innerHTML = element;
+        
+        function changeBackground(color) {
+            changeColor[i].style.background = color;
+        };
+        
+        switch (element) {
+            case "ACERTOU":
+                cor = "green";
+                break;
+            case "ERROU":
+                cor = "red";    
+            default:
+                break;
+        }
+        changeBackground(cor);
     });
 
     document.getElementById("resultado").innerHTML = scoreResult + " ACERTOS";
+
 }
 
 if( document.getElementById("result") ) {
