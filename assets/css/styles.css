@@ -26,12 +26,25 @@ nav p {
 
 section{
     width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 .section1 {
     max-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section1 p {
+    margin: 0;
+    font-size: 15px;
+}
+
+.section1 > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }
 
 .section2 {

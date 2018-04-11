@@ -17,7 +17,6 @@ let score = 0;
 let c = 0;
 
 let answerClick = function(userAnswer){
-    // while( c < questionsAndAnswers.length ){
         
         if( userAnswer === questionsAndAnswers[c].answer ){
             score += 1;
@@ -37,47 +36,48 @@ let answerClick = function(userAnswer){
         }
         else{
             document.getElementById("imagem").src = questionsAndAnswers[c].question;
+            let question = c + 1;
+            document.getElementById("questionCounter").innerHTML = question + " de " + questionsAndAnswers.length;
         }
-    // }
 }
 // #endregion
 
 
 // #region RESULTADO.HTML
-let funcao = function() {
+let changeUserResultsOnResultPage = function() {
     
     let serializedUserAnswers = sessionStorage.getItem("userAnswers");
     let userAnswersResult = serializedUserAnswers.split(",");
     
     let scoreResult = sessionStorage.getItem("score");
     
-    let newResults = document.getElementById("acertos").children;
-    let newColor = document.querySelector("#questao").children;
+    let resultsPlace = document.getElementById("acertos").children;
+    let questionNumber = document.querySelector("#questao").children;
     
     userAnswersResult.forEach( (element, i) => {
-        newResults[i].innerHTML = element;
+        resultsPlace[i].innerHTML = element;
         
         function changeBackground(color) {
-            newColor[i].style.background = color;
+            questionNumber[i].style.background = color;
         };
         
         switch (element) {
             case "ACERTOU":
-            cor = "green";
+            newColor = "green";
             break;
             case "ERROU":
-            cor = "red";    
+            newColor = "red";    
             default:
             break;
         }
-        changeBackground(cor);
+        changeBackground(newColor);
     });
     
     document.getElementById("resultado").innerHTML = scoreResult + " ACERTOS";
 }
 
 if( document.getElementById("result") ) {
-    window.onload = funcao;
+    window.onload = changeUserResultsOnResultPage;
 }
 
 
