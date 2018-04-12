@@ -16,7 +16,117 @@ let userAnswers = [];
 let score = 0;
 let c = 0;
 
+//#region COUNTDOWN TIMER v1
+function startTimer(duration, display) {
+    var timer = duration, seconds;
+    this.resetTimer = function(){
+        timer = duration;
+        // redirect();
+    }
+    setInterval(
+        function () {
+            seconds = parseInt(timer % 60, 10);
+
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "00:" + seconds;
+
+            if (--timer < 0) {
+                this.resetTimer();
+            }
+        }.bind(this), 
+        1000);
+}
+
+let theTimer;
+let callTimer = function(){
+    var tenSeconds = 10,
+    display = document.querySelector('#countdown');
+    theTimer = new startTimer(tenSeconds, display);
+}
+
+if( document.getElementById("quiz") ) {
+    window.onload = callTimer;
+}
+//#endregion
+
+//#region COUNTDOWN TIMER v2
+/*
+function CountDownTimer(duration, granularity) {
+    this.duration = duration;
+    this.granularity = granularity || 1000;
+    this.tickFtns = [];
+    this.running = false;
+  }
+  
+  CountDownTimer.prototype.start = function() {
+    if (this.running) {
+      return;
+    }
+    this.running = true;
+    var start = Date.now(),
+        that = this,
+        diff, obj;
+  
+    (function timer() {
+      diff = that.duration - (((Date.now() - start) / 1000) | 0);
+  
+      if (diff > 0) {
+        setTimeout(timer, that.granularity);
+      } else {
+        diff = 0;
+        that.running = false;
+      }
+
+obj = CountDownTimer.parse(diff);
+that.tickFtns.forEach(function(ftn) {
+  ftn.call(this, obj.minutes, obj.seconds);
+}, that);
+}());
+};
+
+CountDownTimer.prototype.onTick = function(ftn) {
+if (typeof ftn === 'function') {
+this.tickFtns.push(ftn);
+}
+return this;
+};
+
+CountDownTimer.prototype.expired = function() {
+return !this.running;
+};
+
+CountDownTimer.parse = function(seconds) {
+return {
+'minutes': (seconds / 60) | 0,
+'seconds': (seconds % 60) | 0
+};
+};
+
+window.onload = function () {
+    var display = document.querySelector('#countdown'),
+        timer = new CountDownTimer(5),
+        timeObj = CountDownTimer.parse(5);
+
+    format(timeObj.minutes, timeObj.seconds);
+    
+    timer.onTick(format);
+    
+    document.querySelector('.botao').addEventListener('click', function () {
+        timer.start();
+    });
+    
+    function format(minutes, seconds) {
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ':' + seconds;
+    }
+};
+*/
+//#endregion
+
 let answerClick = function(userAnswer){
+    theTimer.resetTimer();
         
         if( userAnswer === questionsAndAnswers[c].answer ){
             score += 1;
@@ -28,18 +138,20 @@ let answerClick = function(userAnswer){
         }
         
         c += 1;
-        
-        if (c === questionsAndAnswers.length){
-            sessionStorage.setItem("userAnswers", userAnswers);
-            sessionStorage.setItem("score", score);
-            window.location = "resultado.html";
+        let redirect = function(){
+            if (c === questionsAndAnswers.length){
+                sessionStorage.setItem("userAnswers", userAnswers);
+                sessionStorage.setItem("score", score);
+                window.location = "resultado.html";
+            }
+            else{
+                document.getElementById("imagem").src = questionsAndAnswers[c].question;
+                let question = c + 1;
+                document.getElementById("questionCounter").innerHTML = question + " de " + questionsAndAnswers.length;
+            }
         }
-        else{
-            document.getElementById("imagem").src = questionsAndAnswers[c].question;
-            let question = c + 1;
-            document.getElementById("questionCounter").innerHTML = question + " de " + questionsAndAnswers.length;
-        }
-}
+        redirect();
+};
 // #endregion
 
 
@@ -114,7 +226,7 @@ if( document.getElementById("result") ) {
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
-        minutes = parseInt(timer / 60, 10)
+        minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -139,27 +251,5 @@ if( document.getElementById("quiz") ) {
 // #endregion
 
 
-function startTimer(duration, display) {
-    var timer = duration, seconds;
-    setInterval(
-        function () {
-            seconds = parseInt(timer % 60, 10);
 
-            seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            display.textContent = "00:" + seconds;
-
-            if (--timer < 0) {
-                timer = duration;
-            }
-        }, 
-        1000);
-}
-
-if( document.getElementById("quiz") ) {
-    window.onload = function () {
-        var tenSeconds = 10,
-        display = document.querySelector('#countdown');
-        startTimer(tenSeconds, display);
-    };
-}
